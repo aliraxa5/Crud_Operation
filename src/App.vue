@@ -1,13 +1,25 @@
 <template>
   <div id="app">
-    <nav>
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </nav>
-    <router-view/>
+    <router-view></router-view>
   </div>
 </template>
 
+<script>
+import { mapGetters } from "vuex";
+import ListProduct from "./components/ListProduct.vue";
+
+export default {
+  computed: {
+    ...mapGetters(["fetchAllProducts"]),
+    Products() {
+      return this.fetchAllProducts;
+    },
+  },
+  components: {
+    ListProduct,
+  },
+};
+</script>
 <style>
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
@@ -16,17 +28,28 @@
   text-align: center;
   color: #2c3e50;
 }
-
-nav {
-  padding: 30px;
+td {
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
-
-nav a {
-  font-weight: bold;
-  color: #2c3e50;
+th {
+  border: 1px solid rgba(0, 0, 0, 0.3);
 }
-
-nav a.router-link-exact-active {
-  color: #42b983;
+.dataTables_wrapper .dataTables_filter {
+  float: initial;
+  text-align: left;
+}
+.dataTables_wrapper .dataTables_length {
+  float: right;
+}
+div#datatable_filter {
+  margin: 20px 0;
+}
+.dataTables_wrapper .dataTables_paginate .paginate_button:hover {
+  color: white !important;
+  border: none;
+  background: #587ecb;
+}
+a {
+  text-decoration: none;
 }
 </style>
